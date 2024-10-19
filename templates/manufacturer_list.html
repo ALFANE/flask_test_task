@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Manufacturers</h1>
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Сountry</th>
+        <th>Сertificates</th>
+        <th>Brands</th>
+    </tr>
+    {% for manufacturer in manufacturers %}
+    <tr>
+        <td>{{ manufacturer.id }}</td>
+        <td>{{ manufacturer.name }}</td>
+        <td>{{ manufacturer.description }}</td>
+        <td>{{ manufacturer.country }}</td>
+        <td>{{ manufacturer.certificates }}</td>
+        <td>
+        {% for brand in manufacturer.brands %}
+            {{ brand.name }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div id="addManufacturerModal" class="modal">
+    <div class="modal-content">
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.name.label }} {{ form.name() }}
+            {{ form.description.label }} {{ form.description() }}
+            {{ form.country.label }} {{ form.country() }}
+            {{ form.certificates.label }} {{ form.certificates() }}
+            {{ form.brands.label }} {{ form.brands(style="width: 100px;") }}
+            {{ form.submit() }}
+        </form>
+    </div>
+</div>
+</main>
+{% endblock %}

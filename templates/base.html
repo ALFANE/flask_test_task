@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <aside>
+        <a href="{{ url_for('admin.admin_brands') }}">Brands</a>
+        <a href="{{ url_for('admin.admin_manufacturers') }}">Manufacturers</a>
+    </aside>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

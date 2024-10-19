@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Brands</h1>
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Logo</th>
+        <th>Manufacturers</th>
+    </tr>
+    {% for brand in brands %}
+    <tr>
+        <td>{{ brand.id }}</td>
+        <td>{{ brand.name }}</td>
+        <td>{{ brand.description }}</td>
+        <td>{{ brand.logo }}</td>
+        <td>
+            {% for manufacturer in brand.manufacturers %}
+                {{ manufacturer.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div id="addBrandModal" class="modal">
+    <div class="modal-content">
+        <form method="POST">
+
+
+            {{ form.hidden_tag() }}
+            {{ form.name.label }} {{ form.name() }}
+            {{ form.description.label }} {{ form.description() }}
+            {{ form.logo.label }} {{ form.logo() }}
+            {{ form.manufacturers.label }} {{ form.manufacturers(style="width: 100px;") }}
+            {{ form.submit() }}
+        </form>
+    </div>
+</div>
+{% endblock %}
