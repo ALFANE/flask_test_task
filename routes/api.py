@@ -18,7 +18,14 @@ def brands_list():
 def brand_detail(brand_id):
     brand = get_brand_by_id(brand_id)
     return jsonify(
-        {"id": brand.id, "name": brand.name, "description": brand.description}
+        {"id": brand.id,
+         "name": brand.name,
+         "description": brand.description,
+         'manufacturers': [
+                {"id": manufacturer.id, "name": manufacturer.name}
+                for manufacturer in brand.manufacturers
+            ],
+         }
     )
 
 
@@ -38,5 +45,9 @@ def manufacturer_detail(manufacturer_id):
             "description": manufacturer.description,
             "country": manufacturer.country,
             "certificates": manufacturer.certificates,
+            'brands': [
+                {"id": brand.id, "name": brand.name}
+                for brand in manufacturer.brands
+            ],
         }
     )
